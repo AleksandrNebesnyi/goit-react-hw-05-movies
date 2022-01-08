@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 // import { Message } from './ErrorMassage.styled';
 import { toast } from 'react-toastify';
 
-// В контейнере рендерится custom-id-yes ??????
-
 function ErrorMessage({ message }) {
   const customId = 'custom-id-yes';
   return toast.error(`${message}`, {
@@ -16,11 +14,6 @@ function ErrorMessage({ message }) {
     progress: undefined,
     toastId: customId,
   });
-
-  // <Message role="alert">
-  //   <p>{message}</p>
-
-  // </Message>
 }
 
 ErrorMessage.propTypes = {

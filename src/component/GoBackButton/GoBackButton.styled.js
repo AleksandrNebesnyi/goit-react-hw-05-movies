@@ -1,0 +1,22 @@
+import styled from '@emotion/styled';
+
+export const Button = styled.button`
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px 20px;
+  border: none;
+  border-radius: 5px;
+
+  background-color: #e0e4e4;
+
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: white;
+    background-color: #02be6e;
+
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+`;
