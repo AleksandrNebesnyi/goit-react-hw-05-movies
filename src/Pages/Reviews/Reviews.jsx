@@ -7,7 +7,7 @@ function Reviews() {
   const [reviews, setReviews] = useState([]);
   const { movieId } = useParams();
   useEffect(() => {
-    fetchReviews(movieId).then(({ results }) => setReviews(results));
+    fetchReviews(movieId).then(({ results}) => setReviews(results));
   }, [movieId]);
   return (
     <>

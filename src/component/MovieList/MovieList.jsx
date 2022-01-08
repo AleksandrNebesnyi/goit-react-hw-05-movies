@@ -1,10 +1,9 @@
-import { NavLink, useRouteMatch } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { List, Item } from './MovieList.styled';
 
 import PropTypes from 'prop-types';
-// import MoviePreview from '../MoviePreview';
 
-// Комопнент списка фильмов, принимает фильмы и location от withRouter
+// Комопнент списка фильмов, принимает фильмы и location
 
 const MovieList = ({ movies, location }) => {
   return (

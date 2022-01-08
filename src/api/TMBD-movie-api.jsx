@@ -16,50 +16,50 @@ export function fetchTrends() {
 // https://api.themoviedb.org/3/search/movie?api_key=7cc503898229934d2a9c34d2b66bc7f6&query=cat&page=1&language=en-US
 
 // Фетч по поиску
-export const fetchMoviesBySearch = async (searchQuery, currentPage) => {
-  try {
-    const { data } = await axios.get(
-      `${BASE_URL}search/movie?api_key=${API_KEY}&query=${searchQuery}&page=${currentPage}&language=en-US`,
-    );
+// export const fetchMoviesBySearch = async (searchQuery, currentPage) => {
+//   try {
+//     const { data } = await axios.get(
+//       `${BASE_URL}search/movie?api_key=${API_KEY}&query=${searchQuery}&page=${currentPage}&language=en-US`,
+//     );
 
-    const results = data.results;
+//     const results = data.results;
 
-    return results;
-  } catch (error) {
-    console.error('Smth wrong with fetch movie search in api', error);
-  }
-};
-// export function fetchMoviesBySearch(searchQuery, currentPage) {
-//   return FetchMovies(
-//     `search/movie?api_key=${API_KEY}&query=${searchQuery}&page=${currentPage}&language=en-US`,
-//   );
-// }
+//     return results;
+//   } catch (error) {
+//     console.error('Smth wrong with fetch movie search in api', error);
+//   }
+// };
+export function fetchMoviesBySearch(searchQuery, currentPage) {
+  return FetchMovies(
+    `${BASE_URL}search/movie?api_key=${API_KEY}&query=${searchQuery}&page=${currentPage}&language=en-US`,
+  );
+}
 
 // Фетч актёров для фильма
-export const fetchCast = async id => {
-  try {
-    const { data } = await axios.get(
-      `/movie/${id}/credits?api_key=${API_KEY}&language=en-US`,
-    );
+// export const fetchCast = async id => {
+//   try {
+//     const { data } = await axios.get(
+//       `/movie/${id}/credits?api_key=${API_KEY}&language=en-US`,
+//     );
 
-    return data;
-  } catch (error) {
-    console.error('Smth wrong with fetch cast in api', error);
-  }
-};
+//     return data;
+//   } catch (error) {
+//     console.error('Smth wrong with fetch cast in api', error);
+//   }
+// };
 
 // Фетч отзывов на фильм
-export const fetchReviews = async id => {
-  try {
-    const { data } = await axios.get(
-      `/movie/${id}/reviews?api_key=${API_KEY}&language=en-US&page=1`,
-    );
+// export const fetchReviews = async id => {
+//   try {
+//     const { data } = await axios.get(
+//       `/movie/${id}/reviews?api_key=${API_KEY}&language=en-US&page=1`,
+//     );
 
-    return data;
-  } catch (error) {
-    console.error('Smth wrong with fetch reviews in api', error);
-  }
-};
+//     return data;
+//   } catch (error) {
+//     console.error('Smth wrong with fetch reviews in api', error);
+//   }
+// };
 
 // Фетч фильма по id
 export const fetchMovieById = async id => {
@@ -78,12 +78,14 @@ export const fetchMovieById = async id => {
 //   return FetchMovies(`/movie/${id}?api_key=${API_KEY}&language=en-US`);
 // }
 
-// export function fetchCast(id) {
-//   return FetchMovies(`/movie/${id}/credits?api_key=${API_KEY}&language=en-US`);
-// }
+export function fetchCast(id) {
+  return FetchMovies(
+    `${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}&language=en-US`,
+  );
+}
 
-// export function fetchReviews(id) {
-//   return FetchMovies(
-//     `/movie/${id}/reviews?api_key=${API_KEY}&language=en-US&page=1`,
-//   );
-// }
+export function fetchReviews(id) {
+  return FetchMovies(
+    `${BASE_URL}/movie/${id}/reviews?api_key=${API_KEY}&language=en-US&page=1`,
+  );
+}

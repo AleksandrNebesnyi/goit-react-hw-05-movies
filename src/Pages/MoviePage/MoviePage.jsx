@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import Searchbar from '../../component/Searchbar/Searchbar';
-// import * as fetchMovieApi from '../../api/TMBD-movie-api';
 import { fetchMoviesBySearch } from '../../api/TMBD-movie-api';
 import MovieList from '../../component/MovieList/MovieList';
 import { ToastContainer } from 'react-toastify';
@@ -15,10 +14,6 @@ const MoviePage = () => {
   const history = useHistory();
   const { search } = location;
   const { query } = queryString.parse(search);
-  // console.log('query', query);
-  // console.log('search', search);
-  console.log('movi', location);
-  // console.log(location.state);
 
   const [searchQuery, setSearchQuery] = useState(query || '');
   const [currentPage, setCurrentPage] = useState('1');
@@ -62,7 +57,7 @@ const MoviePage = () => {
   const getMovies = async () => {
     setLoading(true);
     try {
-      const results = await fetchMoviesBySearch(searchQuery, currentPage);
+      const { results } = await fetchMoviesBySearch(searchQuery, currentPage);
 
       if (results.length === 0) {
         toast.info('Введите валидний запрос');

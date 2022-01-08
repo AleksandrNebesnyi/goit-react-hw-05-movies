@@ -2,7 +2,7 @@ import { Route, Switch } from 'react-router-dom';
 // import { Suspense, lazy } from 'react';
 import Container from './component/Container/Container';
 import AppBar from './component/AppBar/AppBar';
-import Home from './Pages/Home/Home.jsx';
+import HomePage from './Pages/HomePage/HomePage.jsx';
 import MoviePage from './Pages/MoviePage/MoviePage.jsx';
 import ErrorMessage from './component/ErrorMessage/ErrorMasage';
 // import Loader from './component/Loader/Loader.jsx';
@@ -40,7 +40,7 @@ const App = () => {
 
       <Switch>
         <Route path="/" exact>
-          <Home />
+          <HomePage />
         </Route>
         <Route path="/movies" exact>
           <MoviePage />

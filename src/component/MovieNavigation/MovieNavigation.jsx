@@ -1,4 +1,4 @@
-import { useRouteMatch, useLocation, withRouter } from 'react-router-dom';
+import { useRouteMatch, useLocation } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { List, Item } from './MovieNavigation';
@@ -10,7 +10,7 @@ const MovieNavigation = () => {
 
   return (
     <div>
-      <b>Additional information:</b>
+      <b>Additional information</b>
 
       <List>
         <Item>

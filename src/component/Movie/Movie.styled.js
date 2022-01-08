@@ -37,9 +37,3 @@ export const Label = styled.span`
     padding-bottom: 10px;
   }
 `;
-
-export const NavMenu = styled.div`
-  padding-top: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid rgb(204, 204, 204);
-`;
