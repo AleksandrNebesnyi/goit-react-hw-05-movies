@@ -75,7 +75,7 @@ const MoviePage = () => {
       setLoading(false);
     }
   };
-
+  console.log('Movies', movies);
   return (
     <>
       <Searchbar onSubmit={handleOnSubmit} />

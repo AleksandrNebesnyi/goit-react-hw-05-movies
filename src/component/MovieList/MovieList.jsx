@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { List, Item } from './MovieList.styled';
+import { List, Item, Card, Thumb, Img, Title } from './MovieList.styled';
 
 import PropTypes from 'prop-types';
 
@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 const MovieList = ({ movies, location }) => {
   return (
     <List>
-      {movies.map(({ id, original_title }) => (
+      {movies.map(({ id, original_title, poster_path }) => (
         <Item key={id}>
           <NavLink
             to={{
@@ -17,7 +17,18 @@ const MovieList = ({ movies, location }) => {
             }}
             className="link"
           >
-            {original_title}
+            {
+              <Card>
+                <Thumb>
+                  <Img
+                    src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                    alt={original_title}
+                    title={original_title}
+                  />
+                </Thumb>
+                <Title>{original_title}</Title>
+              </Card>
+            }
           </NavLink>
         </Item>
       ))}
@@ -37,3 +48,19 @@ MovieList.propTypes = {
 };
 
 export default MovieList;
+
+// <div className={styles.card}>
+//   <div className={styles.thumb}>
+//     <img
+//       src={posterUrl}
+//       alt={title}
+//       title={title}
+//       className={styles.poster}
+//     />
+//   </div>
+
+//   <p className={styles.text}>
+//     <span>{title}</span>
+//     {vote ? <b className={voteStyle}>{vote}</b> : null}
+//   </p>
+// </div>;

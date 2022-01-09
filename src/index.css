@@ -52,6 +52,13 @@ a {
 .link__active {
   color: rgb(206, 37, 121);
 }
+
+.link--movieList {
+  justify-content: center;
+  padding: 10px;
+
+  font-size: 18px;
+}
 .link--movieDetails {
   display: inline-block;
   font-size: 20px;

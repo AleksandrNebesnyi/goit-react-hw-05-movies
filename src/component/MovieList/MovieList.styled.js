@@ -10,7 +10,7 @@ export const List = styled.ul`
 `;
 
 export const Item = styled.li`
-  flex-basis: calc(100% / 2 - 20px);
+  flex-basis: calc(100% / 3 - 20px);
   margin-left: 20px;
   margin-top: 20px;
 
@@ -28,4 +28,28 @@ export const Item = styled.li`
   }
 `;
 
+export const Card = styled.div`
+  position: relative;
+  border-radius: 5px;
+`;
 
+export const Thumb = styled.div`
+  height: 400px;
+`;
+
+export const Img = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 5px 5px 0 0;
+
+  object-fit: contain;
+  object-position: top;
+`;
+
+export const Title = styled.p`
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+
+  font-size: 18px;
+`;
