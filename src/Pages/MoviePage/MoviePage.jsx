@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import Loader from '../../component/Loader/Loader';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ErrorMessage from 'component/ErrorMessage/ErrorMasage';
 import queryString from 'query-string';
 
 const MoviePage = () => {
@@ -15,11 +16,15 @@ const MoviePage = () => {
   const { search } = location;
   const { query } = queryString.parse(search);
 
+console.log("location",location);
+console.log("history",history);
+console.log("query ", query );
+
+
   const [searchQuery, setSearchQuery] = useState(query || '');
   const [currentPage, setCurrentPage] = useState('1');
-  const [movies, setMovies] = useState(
-    location.state ? location.state.movies : [],
-  );
+  const [movies, setMovies] = useState([]);
+  // eslint-disable-next-line
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(false);
 
@@ -28,6 +33,7 @@ const MoviePage = () => {
     if (!searchQuery) return;
 
     getMovies();
+    // eslint-disable-next-line
   }, [searchQuery]);
 
   // Принимаем с формы запрос и пишем в стейт + сбрасываем после отправки значения из стейта
@@ -37,7 +43,7 @@ const MoviePage = () => {
     setSearchQuery(searchQuery);
     setCurrentPage(1);
     setError(null);
-
+    
     // После поиска пишет в search истории шаблонную строку
     history.push({
       ...location,
@@ -71,11 +77,14 @@ const MoviePage = () => {
       }
     } catch (error) {
       setError(error);
+      ErrorMessage({error});
+      
     } finally {
       setLoading(false);
+     
     }
   };
-  console.log('Movies', movies);
+
   return (
     <>
       <Searchbar onSubmit={handleOnSubmit} />

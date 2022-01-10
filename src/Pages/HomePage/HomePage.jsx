@@ -8,6 +8,7 @@ const Home = () => {
   const location = useLocation();
   const [trends, setTrends] = useState([]);
 
+
   useEffect(() => {
     fetchTrends().then(data => setTrends(data.results));
   }, []);
