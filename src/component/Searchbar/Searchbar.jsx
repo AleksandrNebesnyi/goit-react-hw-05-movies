@@ -1,29 +1,24 @@
-import {  useState } from 'react';
-import { Header, Form, Button, ButtonLabel, Input } from './Searchbar.styled'
-import PropTypes from "prop-types";
-import { toast } from 'react-toastify'
+import { useState } from 'react';
+import { Header, Form, Button, ButtonLabel, Input } from './Searchbar.styled';
+import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { MdFindReplace } from "react-icons/md";
-import { IconContext } from "react-icons";
+import { MdFindReplace } from 'react-icons/md';
+import { IconContext } from 'react-icons';
 
+const Searchbar = ({ onSubmit }) => {
+  const [searchQuery, setSearchQuery] = useState('');
 
-
-
-const Searchbar = ({onSubmit}) =>{
-
-
-const [searchQuery, setSearchQuery]=useState(''); 
-
-const handleSubmitChange = (event) => {
-  setSearchQuery( event.currentTarget.value.toLowerCase())
+  const handleSubmitChange = event => {
+    setSearchQuery(event.currentTarget.value.toLowerCase());
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
 
-    if (searchQuery.trim() === "") {
-        toast.error('Введите Запрос.', {
-        position: "top-right",
+    if (searchQuery.trim() === '') {
+      toast.error('Введите Запрос.', {
+        position: 'top-right',
         autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -36,22 +31,17 @@ const handleSubmitChange = (event) => {
 
     onSubmit(searchQuery);
     setSearchQuery('');
-
-    
-
   };
 
   return (
-    <Header >
-      <Form onSubmit={handleSubmit} >
-        <Button type="submit"  >
-          <IconContext.Provider value={{ color: "ffffff", size: "2em" }}>
+    <Header>
+      <Form onSubmit={handleSubmit}>
+        <Button type="submit">
+          <IconContext.Provider value={{ color: 'ffffff', size: '2em' }}>
             <div>
               <MdFindReplace />
             </div>
           </IconContext.Provider>
-
-
 
           <ButtonLabel>Search</ButtonLabel>
         </Button>
@@ -64,15 +54,11 @@ const handleSubmitChange = (event) => {
           name="searchQuery"
           value={searchQuery}
           onChange={handleSubmitChange}
-
         />
       </Form>
     </Header>
-  )
-
-
-}
-
+  );
+};
 
 Searchbar.propTypes = {
   onSubmit: PropTypes.func.isRequired,

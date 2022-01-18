@@ -3,6 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import Searchbar from '../../component/Searchbar/Searchbar';
 import { fetchMoviesBySearch } from '../../api/TMBD-movie-api';
 import MovieList from '../../component/MovieList/MovieList';
+import Button from '../../component/Button/Button';
 import { ToastContainer } from 'react-toastify';
 import Loader from '../../component/Loader/Loader';
 import { toast } from 'react-toastify';
@@ -16,15 +17,14 @@ const MoviePage = () => {
   const { search } = location;
   const { query } = queryString.parse(search);
 
-console.log("location",location);
-console.log("history",history);
-console.log("query ", query );
-
+  // console.log('location', location);
+  // console.log('history', history);
+  // console.log('query ', query);
 
   const [searchQuery, setSearchQuery] = useState(query || '');
   const [currentPage, setCurrentPage] = useState('1');
   const [movies, setMovies] = useState([]);
-  // eslint-disable-next-line
+
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(false);
 
@@ -32,9 +32,30 @@ console.log("query ", query );
   useEffect(() => {
     if (!searchQuery) return;
 
+    // Фетч фильма по запросу из инпута
+    const getMovies = async () => {
+      setLoading(true);
+      try {
+        const { results } = await fetchMoviesBySearch(searchQuery, currentPage);
+
+        if (results.length === 0) {
+          toast.info('Введите валидний запрос');
+        }
+
+        setMovies(prev => [...prev, ...results]);
+        setLoading(true);
+        if (currentPage !== 1) {
+          scrollOnLoadButton();
+        }
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     getMovies();
-    // eslint-disable-next-line
-  }, [searchQuery]);
+  }, [currentPage, searchQuery]);
 
   // Принимаем с формы запрос и пишем в стейт + сбрасываем после отправки значения из стейта
 
@@ -43,7 +64,7 @@ console.log("query ", query );
     setSearchQuery(searchQuery);
     setCurrentPage(1);
     setError(null);
-    
+
     // После поиска пишет в search истории шаблонную строку
     history.push({
       ...location,
@@ -58,31 +79,9 @@ console.log("query ", query );
       behavior: 'smooth',
     });
   };
-
-  // Фетч фильма по запросу из инпута
-  const getMovies = async () => {
-    setLoading(true);
-    try {
-      const { results } = await fetchMoviesBySearch(searchQuery, currentPage);
-
-      if (results.length === 0) {
-        toast.info('Введите валидний запрос');
-      }
-
-      setMovies(prev => [...prev, ...results]);
-      setCurrentPage(prev => prev + 1);
-      setLoading(true);
-      if (currentPage !== 1) {
-        scrollOnLoadButton();
-      }
-    } catch (error) {
-      setError(error);
-      ErrorMessage({error});
-      
-    } finally {
-      setLoading(false);
-     
-    }
+  // при клике на кнопку Load More увеличиваем страницу.
+  const handleLoadMore = () => {
+    setCurrentPage(prevState => prevState + 1);
   };
 
   return (
@@ -91,7 +90,12 @@ console.log("query ", query );
       {movies && movies.length > 0 && (
         <MovieList movies={movies} location={location} />
       )}
+      {isLoading === false && movies.length >= 12 && (
+        <Button onClick={handleLoadMore} />
+      )}
       {isLoading && <Loader />}
+      {error && <ErrorMessage message={error.message} />}
+
       <ToastContainer autoClose={3000} />
     </>
   );

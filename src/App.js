@@ -27,10 +27,11 @@ const ErrorMessage = lazy(() =>
 
 const App = () => {
   return (
-    <Container>
-      <AppBar />
-      {/* Роутинг приложения */}
-      <Suspense fallback={Loader}>
+    <Suspense fallback={Loader}>
+      <Container>
+        <AppBar />
+        {/* Роутинг приложения */}
+
         <Switch>
           <Route path="/" exact>
             <HomePage />
@@ -48,8 +49,8 @@ const App = () => {
             <ErrorMessage />
           </Route>
         </Switch>
-      </Suspense>
-    </Container>
+      </Container>
+    </Suspense>
   );
 };
 
