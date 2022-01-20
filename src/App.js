@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import Container from './component/Container/Container';
 import AppBar from './component/AppBar/AppBar';
@@ -7,6 +7,8 @@ import AppBar from './component/AppBar/AppBar';
 // import ErrorMessage from './component/ErrorMessage/ErrorMasage';
 // import MovieDetailsPage from './Pages/MovieDetailsPage/MovieDetailsPage.jsx';
 import Loader from 'component/Loader/Loader.jsx';
+import { ToastContainer } from 'react-toastify';
+import Searchbar from 'component/Searchbar/Searchbar';
 
 const HomePage = lazy(() =>
   import('Pages/HomePage/HomePage.jsx' /* webpackChunkName: "home-page" */),
@@ -25,32 +27,50 @@ const ErrorMessage = lazy(() =>
   ),
 );
 
+const Cast = lazy(() =>
+  import('Pages/Cast/Cast.jsx' /* webpackChunkName: "cast" */),
+);
+const Reviews = lazy(() =>
+  import('Pages/Reviews/Reviews.jsx' /* webpackChunkName: "reviews" */),
+);
+
 const App = () => {
   return (
-    <Suspense fallback={Loader}>
-      <Container>
-        <AppBar />
-        {/* Роутинг приложения */}
+    <Container>
+      <AppBar />
+      {/* Роутинг приложения */}
+      <Suspense fallback={Loader}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
 
-        <Switch>
-          <Route path="/" exact>
-            <HomePage />
+          <Route path="movies" element={<MoviePage />}>
+            <Route index element={<Searchbar />} />
+          </Route>
+          {/* <Route path="movies" element={<MoviePage />} /> */}
+
+          <Route path="movies/:id" element={<MovieDetailsPage />}>
+            <Route path="cast" element={<Cast />} />
+            <Route path="reviews" element={<Reviews />} />
           </Route>
 
-          <Route path="/movies" exact>
-            <MoviePage />
-          </Route>
-
-          <Route path="/movies/:movieId">
-            <MovieDetailsPage />
-          </Route>
-
-          <Route>
-            <ErrorMessage />
-          </Route>
-        </Switch>
-      </Container>
-    </Suspense>
+          <Route
+            path="*"
+            element={<ErrorMessage message="Страница не найдена" />}
+          />
+        </Routes>
+      </Suspense>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+    </Container>
   );
 };
 

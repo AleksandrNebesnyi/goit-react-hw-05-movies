@@ -1,12 +1,10 @@
-import { useRouteMatch, useLocation } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { List, Item } from './MovieNavigation';
+import { List, Item, MovieNavigationLink } from './MovieNavigation';
 
 // Меню актёров и обзоров
 const MovieNavigation = () => {
   const location = useLocation();
-  const match = useRouteMatch();
 
   return (
     <div>
@@ -14,30 +12,27 @@ const MovieNavigation = () => {
 
       <List>
         <Item>
-          <NavLink
+          <MovieNavigationLink
             to={{
-              pathname: `${match.url}/cast`, // Формирует путь для ссылки
+              pathname: `cast `, // Формирует путь для ссылки
               state: { ...location.state }, // Передает полученый стейт при переходе на актёров
             }}
-            className="link--movieNavigation"
-            activeClassName="link--movieNavigation__active"
           >
             Cast
-          </NavLink>
+          </MovieNavigationLink>
         </Item>
-        <li>
-          <NavLink
+        <Item>
+          <MovieNavigationLink
             to={{
-              pathname: `${match.url}/reviews`, // Формирует путь для ссылки
+              pathname: `reviews`, // Формирует путь для ссылки
               state: { ...location.state }, // Передает полученый стейт при переходе на обзоры
             }}
-            className="link--movieNavigation"
-            activeClassName="link--movieNavigation__active"
           >
             Reviews
-          </NavLink>
-        </li>
+          </MovieNavigationLink>
+        </Item>
       </List>
+      <Outlet />
     </div>
   );
 };

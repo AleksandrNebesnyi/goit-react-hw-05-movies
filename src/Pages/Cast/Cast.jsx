@@ -5,12 +5,11 @@ import { List, Item, Description, Label } from './Cast';
 
 const Cast = () => {
   const [credits, setCredits] = useState([]);
-  const { movieId } = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
-    fetchCast(movieId).then(({ cast }) => setCredits(cast));
-  }, [movieId]);
-  console.log(fetchCast(movieId));
+    fetchCast(id).then(({ cast }) => setCredits(cast));
+  }, [id]);
 
   return (
     <>

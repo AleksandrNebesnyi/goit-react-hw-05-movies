@@ -1,25 +1,18 @@
 import { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
-import Searchbar from '../../component/Searchbar/Searchbar';
-import { fetchMoviesBySearch } from '../../api/TMBD-movie-api';
-import MovieList from '../../component/MovieList/MovieList';
-import Button from '../../component/Button/Button';
-import { ToastContainer } from 'react-toastify';
-import Loader from '../../component/Loader/Loader';
+import { useLocation, useNavigate } from 'react-router-dom';
+import Searchbar from 'component/Searchbar/Searchbar';
+import { fetchMoviesBySearch } from 'api/TMBD-movie-api';
+import MovieList from 'component/MovieList/MovieList';
+import Button from 'component/Button/Button';
+import Loader from 'component/Loader/Loader';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ErrorMessage from 'component/ErrorMessage/ErrorMasage';
-import queryString from 'query-string';
 
 const MoviePage = () => {
+  let navigation = useNavigate();
   const location = useLocation();
-  const history = useHistory();
-  const { search } = location;
-  const { query } = queryString.parse(search);
-
-  // console.log('location', location);
-  // console.log('history', history);
-  // console.log('query ', query);
+  const query = new URLSearchParams(location.search).get('query');
 
   const [searchQuery, setSearchQuery] = useState(query || '');
   const [currentPage, setCurrentPage] = useState('1');
@@ -65,8 +58,8 @@ const MoviePage = () => {
     setCurrentPage(1);
     setError(null);
 
-    // После поиска пишет в search истории шаблонную строку
-    history.push({
+    // После поиска пишет в search  шаблонную строку
+    navigation({
       ...location,
       search: `query=${searchQuery}`,
     });
@@ -95,8 +88,6 @@ const MoviePage = () => {
       )}
       {isLoading && <Loader />}
       {error && <ErrorMessage message={error.message} />}
-
-      <ToastContainer autoClose={3000} />
     </>
   );
 };

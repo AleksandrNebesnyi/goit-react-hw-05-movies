@@ -7,7 +7,7 @@ import MovieList from '../../component/MovieList/MovieList';
 const Home = () => {
   const location = useLocation();
   const [trends, setTrends] = useState([]);
-
+  console.log('home', location);
 
   useEffect(() => {
     fetchTrends().then(data => setTrends(data.results));

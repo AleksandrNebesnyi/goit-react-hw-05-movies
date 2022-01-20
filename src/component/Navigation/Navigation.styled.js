@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { NavLink } from 'react-router-dom';
 
 export const Nav = styled.nav`
   display: flex;
@@ -44,24 +45,18 @@ export const Item = styled.li`
     margin-right: 20px;
   }
 `;
-export const Link = styled.link`
+
+export const NavLinkStyled = styled(NavLink)`
   display: block;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 
   color: black;
 
   text-decoration: none;
 
-  &:hover,
-  &:focus {
-    text-decoration: underline;
+  &.active {
+    color: red;
+    font-weight: 500;
   }
-`;
-
-export const LinkActive = styled.link`
-  color: red;
-  font-weight: 500;
-
-  text-decoration: none;
 `;

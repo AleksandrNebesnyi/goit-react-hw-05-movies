@@ -5,10 +5,10 @@ import { List, Item, Wrapper, Description, Lebel } from './Reviews';
 
 function Reviews() {
   const [reviews, setReviews] = useState([]);
-  const { movieId } = useParams();
+  const { id } = useParams();
   useEffect(() => {
-    fetchReviews(movieId).then(({ results}) => setReviews(results));
-  }, [movieId]);
+    fetchReviews(id).then(({ results }) => setReviews(results));
+  }, [id]);
   return (
     <>
       <List>

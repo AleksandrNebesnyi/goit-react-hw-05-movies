@@ -49,7 +49,8 @@ a {
 .list {
   list-style: none;
 }
-.link__active {
+
+/* /* .link__active {
   color: rgb(206, 37, 121);
 }
 
@@ -67,20 +68,4 @@ a {
   width: 70px;
   padding: 10px;
   text-align: center;
-}
-
-.link--movieNavigation {
-  display: block;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  color: currentColor;
-}
-.link--movieNavigation:hover,
-.link--movieNavigation:focus {
-  text-decoration: none;
-}
-
-.link--movieNavigation__active {
-  color: #02be6e;
-  font-weight: 500;
-}
+} */

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { NavLink } from 'react-router-dom';
 
 export const List = styled.ul`
   display: flex;
@@ -52,4 +53,9 @@ export const Title = styled.p`
   padding: 10px;
 
   font-size: 18px;
+`;
+
+export const MovieListLink = styled(NavLink)`
+  text-decoration: none;
+  color: inherit;
 `;
