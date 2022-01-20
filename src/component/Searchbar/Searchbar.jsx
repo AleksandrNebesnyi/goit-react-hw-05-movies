@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Header, Form, Button, ButtonLabel, Input } from './Searchbar.styled';
 import PropTypes from 'prop-types';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { MdFindReplace } from 'react-icons/md';
 import { IconContext } from 'react-icons';
+import ErrorMessage from 'component/ErrorMessage/ErrorMasage';
 
 const Searchbar = ({ onSubmit }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -12,20 +12,12 @@ const Searchbar = ({ onSubmit }) => {
   const handleSubmitChange = event => {
     setSearchQuery(event.currentTarget.value.toLowerCase());
   };
-
+  const message = { message: 'Введите Запрос.' };
   const handleSubmit = event => {
     event.preventDefault();
 
     if (searchQuery.trim() === '') {
-      toast.error('Введите Запрос.', {
-        position: 'top-right',
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      ErrorMessage(message);
       return;
     }
 
