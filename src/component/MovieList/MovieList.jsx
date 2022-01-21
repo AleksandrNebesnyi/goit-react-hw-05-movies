@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 // Комопнент списка фильмов, принимает фильмы и location
 
 const MovieList = ({ movies, location }) => {
+  console.log('MovieList', location);
   return (
     <List>
       {movies.map(({ id, original_title, poster_path }) => (
@@ -20,7 +21,7 @@ const MovieList = ({ movies, location }) => {
           <MovieListLink
             to={{
               pathname: `/movies/${id}`, // Заменяем стандартный путь в to
-              // state: { from: location }, // Передает данные из текущего маршрута в следующий
+              state: { from: location }, // Передает данные из текущего маршрута в следующий
             }}
           >
             {

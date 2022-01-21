@@ -6,6 +6,7 @@ import MovieList from 'component/MovieList/MovieList';
 import Button from 'component/Button/Button';
 import Loader from 'component/Loader/Loader';
 import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ErrorMessage from 'component/ErrorMessage/ErrorMasage';
 
@@ -88,6 +89,10 @@ const MoviePage = () => {
       )}
       {isLoading && <Loader />}
       {error && <ErrorMessage message={error.message} />}
+
+      <ToastContainer
+        autoClose={3000}
+        />
     </>
   );
 };

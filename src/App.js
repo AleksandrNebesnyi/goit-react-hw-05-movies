@@ -7,8 +7,6 @@ import AppBar from './component/AppBar/AppBar';
 // import ErrorMessage from './component/ErrorMessage/ErrorMasage';
 // import MovieDetailsPage from './Pages/MovieDetailsPage/MovieDetailsPage.jsx';
 import Loader from 'component/Loader/Loader.jsx';
-import { ToastContainer } from 'react-toastify';
-import Searchbar from 'component/Searchbar/Searchbar';
 
 const HomePage = lazy(() =>
   import('Pages/HomePage/HomePage.jsx' /* webpackChunkName: "home-page" */),
@@ -21,11 +19,11 @@ const MovieDetailsPage = lazy(() =>
     'Pages/MovieDetailsPage/MovieDetailsPage.jsx' /* webpackChunkName: "movie-details-page" */
   ),
 );
-const ErrorMessage = lazy(() =>
-  import(
-    'component/ErrorMessage/ErrorMasage.jsx' /* webpackChunkName: "404-page" */
-  ),
-);
+// const ErrorMessage = lazy(() =>
+//   import(
+//     'component/ErrorMessage/ErrorMasage.jsx' /* webpackChunkName: "404-page" */
+//   ),
+// );
 
 const Cast = lazy(() =>
   import('Pages/Cast/Cast.jsx' /* webpackChunkName: "cast" */),
@@ -50,23 +48,9 @@ const App = () => {
             <Route path="reviews" element={<Reviews />} />
           </Route>
 
-          <Route
-            path="*"
-            element={<ErrorMessage message="Страница не найдена" />}
-          />
+          <Route path="*" element={<HomePage />} />
         </Routes>
       </Suspense>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </Container>
   );
 };

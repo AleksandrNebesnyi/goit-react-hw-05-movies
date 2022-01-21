@@ -5,6 +5,7 @@ import { List, Item, MovieNavigationLink } from './MovieNavigation';
 // Меню актёров и обзоров
 const MovieNavigation = () => {
   const location = useLocation();
+  console.log('MovieNavigation', location);
 
   return (
     <div>
@@ -38,7 +39,6 @@ const MovieNavigation = () => {
 };
 
 MovieNavigation.propTypes = {
-  match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
 };
 
