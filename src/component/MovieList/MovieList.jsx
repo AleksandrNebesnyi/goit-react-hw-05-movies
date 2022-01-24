@@ -19,10 +19,13 @@ const MovieList = ({ movies, location }) => {
       {movies.map(({ id, original_title, poster_path }) => (
         <Item key={id}>
           <MovieListLink
-            to={{
-              pathname: `/movies/${id}`, // Заменяем стандартный путь в to
-              state: { from: location }, // Передает данные из текущего маршрута в следующий
-            }}
+            to={{ pathname: `/movies/${id}` }}
+            state={{ from: location }}
+
+            // to={{
+            //   pathname: `/movies/${id}`, // Заменяем стандартный путь в to
+            //   state: { from: location }, // Передает данные из текущего маршрута в следующий
+            // }}
           >
             {
               <Card>

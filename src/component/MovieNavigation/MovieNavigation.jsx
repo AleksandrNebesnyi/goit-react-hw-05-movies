@@ -1,11 +1,10 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { List, Item, MovieNavigationLink } from './MovieNavigation';
+import { List, Item, MovieNavigationLink } from './MovieNavigation.styled';
 
 // Меню актёров и обзоров
 const MovieNavigation = () => {
   const location = useLocation();
-  console.log('MovieNavigation', location);
 
   return (
     <div>
@@ -13,22 +12,12 @@ const MovieNavigation = () => {
 
       <List>
         <Item>
-          <MovieNavigationLink
-            to={{
-              pathname: `cast `, // Формирует путь для ссылки
-              state: { ...location.state }, // Передает полученый стейт при переходе на актёров
-            }}
-          >
+          <MovieNavigationLink to={`cast`} state={{ ...location.state }}>
             Cast
           </MovieNavigationLink>
         </Item>
         <Item>
-          <MovieNavigationLink
-            to={{
-              pathname: `reviews`, // Формирует путь для ссылки
-              state: { ...location.state }, // Передает полученый стейт при переходе на обзоры
-            }}
-          >
+          <MovieNavigationLink to={`reviews`} state={{ ...location.state }}>
             Reviews
           </MovieNavigationLink>
         </Item>

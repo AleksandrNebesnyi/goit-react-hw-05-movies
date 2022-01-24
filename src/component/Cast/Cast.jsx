@@ -1,14 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { fetchCast } from '../../api/TMBD-movie-api';
-import { List, Item, Description, Label } from './Cast';
+import { List, Item, Description, Label } from './Cast.styled';
+import ErrorMessage from 'component/ErrorMessage/ErrorMasage';
 
 const Cast = () => {
   const [credits, setCredits] = useState([]);
+  const [error, setError] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
-    fetchCast(id).then(({ cast }) => setCredits(cast));
+    fetchCast(id)
+      .then(({ cast }) => setCredits(cast))
+      .catch(error => setError(error));
   }, [id]);
 
   return (
@@ -37,6 +41,7 @@ const Cast = () => {
             </Item>
           ))}
       </List>
+      {error && <ErrorMessage message={error.message} />}
     </>
   );
 };

@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { fetchReviews } from '../../api/TMBD-movie-api';
-import { List, Item, Wrapper, Description, Lebel } from './Reviews';
+import ErrorMessage from 'component/ErrorMessage/ErrorMasage';
+import { List, Item, Wrapper, Description, Lebel } from './Reviews.styled';
 
 function Reviews() {
   const [reviews, setReviews] = useState([]);
+  const [error, setError] = useState(null);
   const { id } = useParams();
   useEffect(() => {
-    fetchReviews(id).then(({ results }) => setReviews(results));
+    fetchReviews(id)
+      .then(({ results }) => setReviews(results))
+      .catch(error => setError(error));
   }, [id]);
   return (
     <>
@@ -42,6 +46,7 @@ function Reviews() {
             : "We don't have any reviews for this movie"
           : null}
       </List>
+      {error && <ErrorMessage message={error.message} />}
     </>
   );
 }

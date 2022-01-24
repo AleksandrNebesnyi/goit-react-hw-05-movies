@@ -26,10 +26,10 @@ const MovieDetailsPage = lazy(() =>
 // );
 
 const Cast = lazy(() =>
-  import('Pages/Cast/Cast.jsx' /* webpackChunkName: "cast" */),
+  import('component/Cast/Cast.jsx' /* webpackChunkName: "cast" */),
 );
 const Reviews = lazy(() =>
-  import('Pages/Reviews/Reviews.jsx' /* webpackChunkName: "reviews" */),
+  import('component/Reviews/Reviews.jsx' /* webpackChunkName: "reviews" */),
 );
 
 const App = () => {
@@ -39,6 +39,8 @@ const App = () => {
       {/* Роутинг приложения */}
       <Suspense fallback={Loader}>
         <Routes>
+          {/* <Route path="/" element={<AppBar />}>
+            <Route index element={<HomePage />} /> */}
           <Route path="/" element={<HomePage />} />
 
           <Route path="movies" element={<MoviePage />} />
@@ -47,7 +49,6 @@ const App = () => {
             <Route path="cast" element={<Cast />} />
             <Route path="reviews" element={<Reviews />} />
           </Route>
-
           <Route path="*" element={<HomePage />} />
         </Routes>
       </Suspense>
