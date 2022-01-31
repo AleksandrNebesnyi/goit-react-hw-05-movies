@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import Container from './component/Container/Container';
 import AppBar from './component/AppBar/AppBar';
@@ -49,7 +49,8 @@ const App = () => {
             <Route path="cast" element={<Cast />} />
             <Route path="reviews" element={<Reviews />} />
           </Route>
-          <Route path="*" element={<HomePage />} />
+          {/* <Route path="*" element={<HomePage />} /> */}
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>
     </Container>
